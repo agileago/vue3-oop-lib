@@ -1,0 +1,53 @@
+{
+  "name": "project-name-monorepo",
+  "version": "0.0.1",
+  "private": true,
+  "packageManager": "pnpm@9.1.1",
+  "description": "Monorepo of project-name",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "dev": "pnpm run --filter=\"./packages/*\" dev",
+    "build": "pnpm run --filter=\"./packages/*\" build",
+    "lint": "eslint --cache .",
+    "lint:fix": "pnpm run lint --fix",
+    "test": "vitest",
+    "release:change": "changeset",
+    "release:version": "changeset version && pnpm install",
+    "release": "pnpm publish -r",
+    "postinstall": "simple-git-hooks"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "simple-git-hooks": {
+    "pre-commit": "enpm exec lint-staged --allow-empty --concurrent false",
+    "commit-msg": "pnpm exec commitlint -e $1"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": "eslint --fix",
+    "*.{vue,ts,tsx,js,jsx,less,css}": "prettier --write"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.28.1",
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "@configurajs/eslint": "^0.1.2",
+    "@configurajs/prettier": "^0.1.1",
+    "@types/node": "^22.13.14",
+    "eslint": "^9.23.0",
+    "prettier": "^3.5.3",
+    "lint-staged": "^14.0.1",
+    "simple-git-hooks": "^2.9.0",
+    "tsup": "^8.4.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2",
+    "vitest": "^3.1.1"
+  },
+  "engines": {
+    "pnpm": ">=9.0",
+    "node": ">=18.16.0"
+  }
+}
