@@ -1,11 +1,7 @@
-# monorepo-lib-starter
+# vue3-oop相关库
 
-## Install
-
-```bash
-npm i @scope/foo
-```
+## List
 
 ## License
 
-[MIT](./LICENSE) License © 2024 [agileao](https://github.com/agileago)
+[MIT](./LICENSE) License © 2024 [agileago](https://github.com/agileago)

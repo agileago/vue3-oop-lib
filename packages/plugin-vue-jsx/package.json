@@ -1,0 +1,56 @@
+{
+  "name": "@vue3-oop/plugin-vue-jsx",
+  "version": "1.5.0",
+  "packageManager": "pnpm@9.1.1",
+  "description": "vue3-oop tsx transform vite plugin",
+  "type": "commonjs",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agileago/vue3-oop-lib.git",
+    "directory": "packages/plugin-vue-jsx"
+  },
+  "bugs": {
+    "url": "https://github.com/agileago/vue3-oop-lib/issues"
+  },
+  "homepage": "https://github.com/agileago/vue3-oop-lib/tree/main/packages/plugin-vue-jsx#readme",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "prepublishOnly": "pnpm build"
+  },
+  "dependencies": {
+    "@babel/core": "^7.26.10",
+    "@babel/plugin-transform-typescript": "^7.27.0",
+    "@vue/babel-plugin-jsx": "^1.4.0"
+  },
+  "devDependencies": {
+    "@babel/types": "^7.27.0",
+    "@types/babel__core": "^7.20.5",
+    "vite": "^6.2.4"
+  },
+  "peerDependencies": {
+    "vite": "^5.0.0 || ^6.0.0",
+    "vue": "^3.0.0",
+    "typescript": ">=4.0.0"
+  },
+  "engines": {
+    "node": ">=18.16.0"
+  }
+}
