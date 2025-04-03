@@ -1,0 +1,73 @@
+{
+  "name": "@vue3-oop/ts-gear",
+  "version": "4.12.0",
+  "packageManager": "pnpm@9.1.1",
+  "description": "swagger to typescript with mock data",
+  "type": "module",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json",
+    "./**": "./dist/**"
+  },
+  "bin": {
+    "tsg": "./bin/tsg.js"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "prepublishOnly": "pnpm build"
+  },
+  "dependencies": {
+    "@vitalets/google-translate-api": "^8.0.0",
+    "app-root-path": "^3.0.0",
+    "chalk": "^2.4.2",
+    "commander": "^8.2.0",
+    "cosmiconfig": "^5.2.1",
+    "cross-fetch": "^3.1.5",
+    "fs-extra": "^7.0.1",
+    "json5": "^2.2.3",
+    "lodash": "^4.17.21",
+    "mkdirp": "^1.0.4",
+    "openapi3-ts": "^1.4.0",
+    "path-to-regexp": "^3.0.0",
+    "prettier": "^2.2.1",
+    "prompts": "^2.4.1",
+    "rimraf": "^3.0.2",
+    "swagger-schema-official": "^2.0.0-bab6bed",
+    "traverse": "^0.6.6",
+    "ts-morph": "^18.0.0",
+    "url-join": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/swagger-schema-official": "^2.0.25",
+    "@types/lodash": "^4.17.16",
+    "@types/prompts": "^2.4.9",
+    "@types/app-root-path": "^1.2.4",
+    "@types/cosmiconfig": "^5.0.3",
+    "@types/fs-extra": "^5.0.5",
+    "@types/http-server": "^0.10.0",
+    "@types/jest": "^29.5.1",
+    "@types/mkdirp": "^1.0.0",
+    "@types/moxios": "^0.4.9",
+    "@types/node": "^11.13.8",
+    "@types/rimraf": "^2.0.3",
+    "@types/traverse": "^0.6.25-alpha"
+  },
+  "peerDependencies": {
+    "typescript": ">=4"
+  }
+}

@@ -3,6 +3,8 @@
   "compilerOptions": {
     "target": "ESNext",
     "importHelpers": true,
+    "allowUnusedLabels": true,
+    "types": ["vue/jsx"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
