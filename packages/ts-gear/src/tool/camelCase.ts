@@ -1,4 +1,4 @@
-import { upperFirst } from 'lodash'
+import { upperFirst } from 'es-toolkit/compat'
 
 /**
  * lodash camelCase will convert non word first charator lower case

@@ -1,9 +1,8 @@
 import { existsSync, readFileSync } from 'fs'
 import { join } from 'path'
+import appRoot from 'app-root-path'
 import { parse } from 'json5'
 import type * as ts from 'typescript'
-
-import appRoot = require('app-root-path')
 
 /**
  * get tsconfig compilerOptions from cwd project

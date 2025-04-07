@@ -1,9 +1,11 @@
 import { join } from 'path'
-import { sync } from 'rimraf'
-import * as ts from 'typescript'
+import rimraf from 'rimraf'
+import ts from 'typescript'
 import { targetFileNames } from '../constant'
 import { info } from '../tool/log'
 import type { Project } from '../type'
+
+const { sync } = rimraf
 
 export function toJS(project: Project, tsGearConfigPath: string): void {
   const compilerOptions: ts.CompilerOptions = {
@@ -16,18 +18,6 @@ export function toJS(project: Project, tsGearConfigPath: string): void {
   // 运行前先清除已有的js文件
   // sync(join(targetPath, '*.js'))
   const emitResult = program.emit()
-
-  // const allDiagnostics = ts.getPreEmitDiagnostics(program).concat(emitResult.diagnostics)
-
-  // allDiagnostics.forEach(diagnostic => {
-  //   if (diagnostic.file) {
-  //     const { line, character } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start!)
-  //     const message = ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n')
-  //     console.log(`${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`)
-  //   } else {
-  //     console.log(ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n'))
-  //   }
-  // })
 
   const exitCode = emitResult.emitSkipped ? 1 : 0
   if (exitCode === 0) {

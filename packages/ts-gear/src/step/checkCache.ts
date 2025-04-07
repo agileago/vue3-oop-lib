@@ -1,10 +1,8 @@
-/* eslint-disable import/first */
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { join } from 'path'
+import appRoot from 'app-root-path'
 import { contentHash } from '../tool/contentHash'
 import type { Project } from '../type'
-
-import appRoot = require('app-root-path')
 
 export const checkCache = (project: Project, spec: any): boolean => {
   const cacheFile = join(appRoot.path, 'node_modules', '.cache')

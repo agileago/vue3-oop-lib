@@ -1,6 +1,6 @@
 /** use native fetch to request */
 import { URL } from 'url'
-import { forEach, isPlainObject } from 'lodash'
+import { forEach, isPlainObject } from 'es-toolkit/compat'
 import * as pathToRegexp from 'path-to-regexp'
 import { MIME_JSON, MIME_TEXT } from '../constant'
 import type { Requester, RequestParameter } from '../type'

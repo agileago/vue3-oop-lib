@@ -3,7 +3,7 @@
  * modify js to ts and some ts-gear project part change
  * */
 
-import { castArray, find, isFunction, isObject } from 'lodash'
+import { castArray, find, isFunction, isObject } from 'es-toolkit/compat'
 import type { Schema } from 'swagger-schema-official'
 import type { DefinitionMap, EnumMap, SwaggerRequest } from '../../type'
 

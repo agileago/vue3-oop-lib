@@ -1,6 +1,6 @@
-import { get, remove, upperFirst } from 'lodash'
+import { get, remove, upperFirst } from 'es-toolkit/compat'
 import type { Spec } from 'swagger-schema-official'
-import * as ts from 'typescript'
+import ts from 'typescript'
 import { httpMethods } from '../type'
 import { cleanName } from './cleanName'
 import { tsNodeToString } from './tsNodeToString'

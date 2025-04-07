@@ -6,8 +6,6 @@ import type { StringObject } from '../../types'
 import getError, { ERROR_CODE } from '../error'
 import type { RequestOptions } from './types'
 
-require('tls').DEFAULT_ECDH_CURVE = 'auto'
-
 export default function makerequest(options: RequestOptions): Promise<any> {
   const { method = 'get' } = options
   const urlObj = parse(options.url, true)

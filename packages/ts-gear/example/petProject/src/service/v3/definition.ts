@@ -12,31 +12,31 @@ export interface FieldDefAddDTO {
    * @description
    *   字段描述
    */
-  description?: string
+  description?: string;
   /**
    * @description
    *   字段Id
    */
-  fieldId: string
+  fieldId: string;
   /**
    * @description
    *   字段名称
    * @example
    *   name1
    */
-  fieldName: string
+  fieldName: string;
   /**
    * @description
    *   关联
    */
-  tableId: string
+  tableId: string;
   /**
    * @description
    *   字段类型：boolean,long,double,string,date
    */
-  type: string
+  type: string;
 }
 
-export type ReplyVOPageVOFieldDefListVO = any
-export type ReplyVOFieldDefShowVO = any
-export type ReplyVO = any
+export type ReplyVOPageVOFieldDefListVO = any;
+export type ReplyVOFieldDefShowVO = any;
+export type ReplyVO = any;

@@ -1,4 +1,5 @@
 import { Command } from 'commander'
+import pkg from '../../../package.json'
 import { configFileName } from '../../constant'
 
 function collectProjects(value: string) {
@@ -17,8 +18,6 @@ const program = new Command()
  * collect project names from cli
  * */
 export const getCliOption = (): Result => {
-  // eslint-disable-next-line
-  const pkg = require('../../../package.json')
   program
     .version(pkg.version)
     .usage('tsg or tsg -p projectName')

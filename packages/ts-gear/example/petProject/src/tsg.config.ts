@@ -1,14 +1,4 @@
-/* eslint-disable import/no-relative-packages */
-import type { Options } from 'prettier'
 import type { Project } from '../../../src/type'
-
-const prettierConfig: Options = {
-  semi: false,
-  useTabs: false,
-  singleQuote: true,
-  trailingComma: 'all',
-  // parser: 'babel',
-}
 
 const projects: Project[] = [
   {
@@ -50,7 +40,6 @@ const projects: Project[] = [
     importRequesterStatement: 'import { requester } from "fffxx"',
     shouldGenerateMock: true,
     useCache: false,
-    prettierConfig,
     EOL: '\n',
   },
   {

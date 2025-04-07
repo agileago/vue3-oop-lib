@@ -1,7 +1,7 @@
 /**
  * Open Api 2.0
  * https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md */
-import { map } from 'lodash'
+import { map } from 'es-toolkit/compat'
 import type { SchemaObject } from 'openapi3-ts'
 import type { BodyParameter, Parameter, Response, Schema } from 'swagger-schema-official'
 import { config } from '../constant'

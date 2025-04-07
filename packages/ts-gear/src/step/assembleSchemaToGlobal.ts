@@ -1,4 +1,4 @@
-import { findKey, forEach, isEqual } from 'lodash'
+import { findKey, forEach, isEqual } from 'es-toolkit/compat'
 import type { Spec } from 'swagger-schema-official'
 import { getGlobal } from '../projectGlobalVariable'
 import { generateEnumName, generateEnumTypescriptContent } from '../tool/enumType'

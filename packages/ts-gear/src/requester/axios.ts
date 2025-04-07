@@ -1,7 +1,7 @@
 /** use axios fetch to request */
 import axios from 'axios'
 import type { AxiosInstance, AxiosRequestConfig, Method } from 'axios'
-import { forEach } from 'lodash'
+import { forEach } from 'es-toolkit/compat'
 import * as pathToRegexp from 'path-to-regexp'
 import type { Requester, RequestParameter } from '../type'
 

@@ -1,4 +1,4 @@
-import { camelCase, upperFirst } from 'lodash'
+import { camelCase, upperFirst } from 'es-toolkit/compat'
 import type { GenerateRequestFunctionNameParameter } from '../type'
 
 /** default generate request function method */

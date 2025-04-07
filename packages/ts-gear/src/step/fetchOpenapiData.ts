@@ -1,6 +1,7 @@
 import { join } from 'path'
-import 'cross-fetch/polyfill'
-import { parse } from 'json5'
+import 'cross-fetch'
+import { createRequire } from 'node:module'
+import json5 from 'json5'
 import { error, info } from '../tool/log'
 import type { Project } from '../type'
 
@@ -20,7 +21,7 @@ export const fetchOpenapiData = async (project: Project, tsGearConfigPath: strin
       fetchOption = await fetchOption()
     }
     const res = await fetch(url, fetchOption)
-    const swaggerSchema = parse(await res.text())
+    const swaggerSchema = json5.parse(await res.text())
     info(`got swagger spec doc from ${verbose}`)
     return swaggerSchema
   }
@@ -31,6 +32,6 @@ export const fetchOpenapiData = async (project: Project, tsGearConfigPath: strin
     error(message)
     throw new Error(message)
   }
-  /* eslint-disable-next-line import/no-dynamic-require */
+  const require = createRequire(import.meta.url)
   return require(source)
 }

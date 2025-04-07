@@ -1,11 +1,14 @@
 import { existsSync, writeFileSync } from 'fs'
 import { dirname, join } from 'path'
+import { createJiti } from 'jiti'
 import prompts from 'prompts'
 import { configFileName } from '../../constant'
 import { initConfig } from '../../content/initConfig'
 import { warn } from '../../tool/log'
 import type { Project } from '../../type'
 import { getCliOption } from './cliOption'
+
+const jiti = createJiti(import.meta.url)
 
 /**
  * get user config
@@ -35,9 +38,7 @@ export const getUserConfig = async () => {
     }
   }
   const tsGearConfigPath = join(cwd, cliOption.config || join('src', configFileName))
-  /* eslint-disable import/no-dynamic-require */
-  const config = require(tsGearConfigPath)
-  /* eslint-enable import/no-dynamic-require */
+  const config: any = await jiti.import(tsGearConfigPath)
   let projects = (config.default ? config.default : config) as Project[]
   const projectNamesFromCommandLine = cliOption.names
   if (projectNamesFromCommandLine.length > 0) {

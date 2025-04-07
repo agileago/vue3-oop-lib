@@ -1,4 +1,4 @@
-import { isEmpty, upperFirst } from 'lodash'
+import { isEmpty, upperFirst } from 'es-toolkit/compat'
 import type { Parameter, Reference } from 'swagger-schema-official'
 import { harvest, sow } from '../../source'
 import { schemaToTypescript } from '../../tool/schemaToTypescript'

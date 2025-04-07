@@ -15,7 +15,7 @@
     "release:change": "changeset",
     "release:version": "changeset version && pnpm install",
     "release": "pnpm publish -r",
-    "postinstall": "simple-git-hooks"
+    "prepare": "simple-git-hooks"
   },
   "commitlint": {
     "extends": [

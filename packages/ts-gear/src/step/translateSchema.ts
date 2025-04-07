@@ -1,4 +1,4 @@
-import { find } from 'lodash'
+import { find } from 'es-toolkit/compat'
 import type { Spec } from 'swagger-schema-official'
 import { translate } from '../tool/translate'
 import { traverseSchema } from '../tool/traverseSchema'

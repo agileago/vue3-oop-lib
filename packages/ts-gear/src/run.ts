@@ -18,10 +18,6 @@ export const processProject = async (project: Project, tsGearConfigPath: string)
     )
     return
   }
-
-  if (project.translationEngine) {
-    await step.translateSchema(spec, project)
-  }
   const keepGeneric = project.keepGeneric !== false
   step.cleanRefAndDefinitionName(spec, keepGeneric)
   step.assembleSchemaToGlobal(spec, project)
@@ -62,12 +58,7 @@ export const processProject = async (project: Project, tsGearConfigPath: string)
  * */
 export const runByCommand = async (): Promise<void> => {
   const { projects, tsGearConfigPath } = await step.getUserConfig()
-  // const shouldSerial = projects.some(k => k.nullableFalseAsRequired)
-  // if (shouldSerial) {
-  //   await projects.reduce((p, project) => p.then(() => processProject(project, tsGearConfigPath)), Promise.resolve())
-  // } else {
   await Promise.all(projects.map(project => processProject(project, tsGearConfigPath)))
-  // }
 }
 
 /**
@@ -75,10 +66,5 @@ export const runByCommand = async (): Promise<void> => {
  * should be used by nodejs env call
  * */
 export const run = async ({ projects, appPath }: { projects: Project[]; appPath: string }): Promise<void> => {
-  // const shouldSerial = projects.some(k => k.nullableFalseAsRequired)
-  // if (shouldSerial) {
-  //   await projects.reduce((p, project) => p.then(() => processProject(project, appPath)), Promise.resolve())
-  // } else {
   await Promise.all(projects.map(project => processProject(project, appPath)))
-  // }
 }

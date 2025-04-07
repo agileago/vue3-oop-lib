@@ -1,4 +1,4 @@
-import { upperFirst } from 'lodash'
+import { upperFirst } from 'es-toolkit/compat'
 import type { ResponseObject } from 'openapi3-ts'
 import type { Reference, Response } from 'swagger-schema-official'
 import { harvest, sow } from '../../source'

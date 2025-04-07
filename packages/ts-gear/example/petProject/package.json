@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "api": "tsx ../../src/cli.ts"
+  },
   "dependencies": {
     "lodash": "^4.17.15",
     "path-to-regexp": "^3.0.0"
