@@ -32,7 +32,7 @@ export const assembleSchemaToGlobal = (spec: Spec, project: Project) => {
       if (existEnumName) {
         enumMap[name] = {
           originalContent: value,
-          typescriptContent: generateTypeAlias(name, existEnumName),
+          typescriptContent: generateTypeAlias(name, existEnumName as string),
         }
       } else {
         const tsContent = generateEnumTypescriptContent(name, value)
@@ -50,6 +50,7 @@ export const assembleSchemaToGlobal = (spec: Spec, project: Project) => {
     }
   })
   forEach(spec.paths, (pathSchema /** Path */, pathname) => {
+    pathname = pathname as string
     const genFunctionName = project.generateRequestFunctionName || generateRequestFunctionName
     forEach(httpMethods, httpMethod => {
       const operation: any = pathSchema[httpMethod]
@@ -77,11 +78,14 @@ export const assembleSchemaToGlobal = (spec: Spec, project: Project) => {
           parameters = parameters.concat(v3Parameters)
         }
         requestMap[
-          genFunctionName({
-            httpMethod,
-            pathname,
-            schema: spec,
-          })
+          genFunctionName(
+            {
+              httpMethod,
+              pathname,
+              schema: spec,
+            },
+            project.name,
+          )
         ] = {
           pathname,
           httpMethod,

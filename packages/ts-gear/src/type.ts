@@ -192,7 +192,7 @@ export interface Project {
    * @required
    * 引入自定义requester的模板字符串
    * */
-  importRequesterStatement?: string
+  importRequesterStatement?: string | ((name: string) => string)
 
   /**
    * @default false
@@ -253,7 +253,7 @@ export interface Project {
    * generate request function name method
    * 生成请求函数名的自定义方法
    * */
-  generateRequestFunctionName?: (arg: GenerateRequestFunctionNameParameter) => string
+  generateRequestFunctionName?: (arg: GenerateRequestFunctionNameParameter, name: string) => string
 
   /**
    * if you need, use this option to generate your function all by your self

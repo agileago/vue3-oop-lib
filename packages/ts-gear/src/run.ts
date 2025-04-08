@@ -1,5 +1,6 @@
 import { restore } from './projectGlobalVariable'
 import * as step from './step'
+import { formatWithPrettierIfAvailable } from './step/formatWithPrettier'
 import { info } from './tool/log'
 import type { Project } from './type'
 
@@ -12,12 +13,6 @@ export const processProject = async (project: Project, tsGearConfigPath: string)
   step.processEOL(project)
   step.prepareProjectDirectory(project, tsGearConfigPath)
   const spec = await step.fetchOpenapiData(project, tsGearConfigPath)
-  if (project.useCache && step.checkCache(project, spec)) {
-    info(
-      `cache hit, skip regenerate project(${project.name}), add "useCache: false" to your project in "tsg.config.ts" to disable cache`,
-    )
-    return
-  }
   const keepGeneric = project.keepGeneric !== false
   step.cleanRefAndDefinitionName(spec, keepGeneric)
   step.assembleSchemaToGlobal(spec, project)
@@ -55,6 +50,7 @@ export const processProject = async (project: Project, tsGearConfigPath: string)
 export const runByCommand = async (): Promise<void> => {
   const { projects, tsGearConfigPath } = await step.getUserConfig()
   await Promise.all(projects.map(project => processProject(project, tsGearConfigPath)))
+  await formatWithPrettierIfAvailable(tsGearConfigPath)
 }
 
 /**

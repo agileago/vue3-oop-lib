@@ -13,7 +13,7 @@ import { importAllDefinition } from './importAllDefinition'
 export const prepareWriteContent = (project: Project, tsGearConfigPath: string): PrepareToWrite => {
   const { definitionMap, requestMap, enumMap } = getGlobal(project)
   const { EOL } = config
-  const dest = join(tsGearConfigPath, project.dest, project.name)
+  const dest = join(tsGearConfigPath, project.dest!, project.name)
 
   const definitionTypeNameSet = new Set<string>()
   const definitionContent = Object.getOwnPropertyNames(definitionMap)

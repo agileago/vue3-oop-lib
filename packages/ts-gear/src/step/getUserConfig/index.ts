@@ -1,9 +1,10 @@
-import { existsSync, mkdirSync, writeFileSync } from 'fs'
-import { dirname, join } from 'path'
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
+import { dirname, join } from 'node:path'
 import { createJiti } from 'jiti'
 import prompts from 'prompts'
 import { configFileName, configHttpFileName } from '../../constant'
 import { httpConfig, initConfig } from '../../content/initConfig'
+import { projectDefaultConfig } from '../../projectDefaultConfig'
 import { warn } from '../../tool/log'
 import type { Project } from '../../type'
 import { getCliOption } from './cliOption'
@@ -60,6 +61,10 @@ export const getUserConfig = async () => {
       warn(`your input names "${cliOption.names.join(', ')}" match 0 projects, checkout and retry.`)
     }
   }
+
+  // 配置默认的项目配置
+  projects.forEach(project => Object.assign(project, projectDefaultConfig))
+
   return {
     tsGearConfigPath: dirname(tsGearConfigPath),
     projects,

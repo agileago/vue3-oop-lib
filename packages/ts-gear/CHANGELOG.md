@@ -1,0 +1,7 @@
+# @vue3-oop/ts-gear
+
+## 5.0.0
+
+### Major Changes
+
+- 升级大版本，更简单易用

@@ -1,7 +1,6 @@
 export * from './processEOL'
 export * from './getUserConfig'
 export * from './fetchOpenapiData'
-export * from './checkCache'
 export * from './prepareProjectDirectory'
 export * from './assembleSchemaToGlobal'
 export * from './cleanRefAndDefinitionName'

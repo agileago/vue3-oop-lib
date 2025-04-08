@@ -21,3 +21,5 @@ export const config: {
 
 export const MIME_JSON = 'application/json'
 export const MIME_TEXT = 'text/plain'
+
+export const DEFAULT_OPENAPI_DIR = './openapi'

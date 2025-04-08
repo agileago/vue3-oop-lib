@@ -1,6 +1,7 @@
 import { Autobind, Component, type ComponentProps, Computed, Hook, Mut, VueComponent, VueService } from 'vue3-oop'
 import type { VNodeChild } from 'vue'
 import { Injectable } from 'injection-js'
+import { apiAppGetPetFindByStatus } from '@/api/app'
 
 // 服务，可复用的服务
 @Autobind()
