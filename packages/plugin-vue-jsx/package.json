@@ -14,6 +14,10 @@
     "url": "https://github.com/agileago/vue3-oop-lib/issues"
   },
   "homepage": "https://github.com/agileago/vue3-oop-lib/tree/main/packages/plugin-vue-jsx#readme",
+  "author": {
+    "name": "agileago",
+    "email": "593728759@qq.com"
+  },
   "files": [
     "dist"
   ],

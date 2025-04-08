@@ -8,7 +8,7 @@ function collectProjects(value: string) {
 
 type Result = {
   names: string[]
-  init: boolean
+  init: string
   config: string
 }
 
@@ -26,7 +26,7 @@ export const getCliOption = (): Result => {
       'assign project name, more names use comma split, like projectA,projectB',
       collectProjects,
     )
-    .option('-i, --init', `create ${configFileName}.ts config file`)
+    .option('-i, --init <init dir name>', `create ${configFileName}.ts config file`)
     .option('-c, --config <assign config file>', 'assign config file')
     .parse(process.argv)
 
@@ -34,7 +34,7 @@ export const getCliOption = (): Result => {
 
   const result: Result = {
     names: [],
-    init: Boolean(options.init),
+    init: '',
     config: '',
   }
   const names = options.projects
@@ -43,6 +43,9 @@ export const getCliOption = (): Result => {
   }
   if (options.config) {
     result.config = String(options.config).trim()
+  }
+  if (options.init) {
+    result.init = String(options.init).trim()
   }
   // if not delete commander cache
   // program will keep cache and break test

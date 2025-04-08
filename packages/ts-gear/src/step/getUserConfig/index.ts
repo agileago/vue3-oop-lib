@@ -1,15 +1,27 @@
-import { existsSync, writeFileSync } from 'fs'
+import { existsSync, mkdirSync, writeFileSync } from 'fs'
 import { dirname, join } from 'path'
 import { createJiti } from 'jiti'
 import prompts from 'prompts'
-import { configFileName } from '../../constant'
-import { initConfig } from '../../content/initConfig'
+import { configFileName, configHttpFileName } from '../../constant'
+import { httpConfig, initConfig } from '../../content/initConfig'
 import { warn } from '../../tool/log'
 import type { Project } from '../../type'
 import { getCliOption } from './cliOption'
 
 const jiti = createJiti(import.meta.url)
 
+function writeInitFile(configDir: string) {
+  if (!existsSync(configDir)) {
+    mkdirSync(configDir, { recursive: true })
+  }
+
+  // 写入配置文件
+  const configFilePath = join(configDir, `${configFileName}.ts`)
+  const httpFilePath = join(configDir, `${configHttpFileName}.ts`)
+
+  writeFileSync(configFilePath, initConfig)
+  writeFileSync(httpFilePath, httpConfig)
+}
 /**
  * get user config
  * from cli option
@@ -17,7 +29,8 @@ const jiti = createJiti(import.meta.url)
 export const getUserConfig = async () => {
   const cwd = process.cwd()
   const cliOption = getCliOption()
-  const configFilePath = join(cwd, 'src', `${configFileName}.ts`)
+  const configDir = join(cwd, cliOption.init || 'src')
+  const configFilePath = join(configDir, `${configFileName}.ts`)
   if (cliOption.init) {
     if (existsSync(configFilePath)) {
       const { overwrite } = await prompts({
@@ -27,10 +40,10 @@ export const getUserConfig = async () => {
         initial: true,
       })
       if (overwrite) {
-        writeFileSync(configFilePath, initConfig)
+        writeInitFile(configDir)
       }
     } else {
-      writeFileSync(configFilePath, initConfig)
+      writeInitFile(configDir)
     }
     return {
       projects: [],

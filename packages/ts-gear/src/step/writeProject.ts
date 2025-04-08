@@ -1,16 +1,11 @@
-import { prettierWrite } from '../tool/prettierWrite'
+import { writeFileSync } from 'node:fs'
 import type { PrepareToWrite, Project } from '../type'
 
 /**
  * write to project dir
  */
 export const writeProject = (project: Project, option: PrepareToWrite) => {
-  prettierWrite({ data: option.definitionFileContent, file: option.definitionFile, option: project.prettierConfig })
-
-  prettierWrite({ data: option.requestFileContent, file: option.requestFile, option: project.prettierConfig })
-  if (project.shouldGenerateMock) {
-    prettierWrite({ data: option.mockRequestFileContent, file: option.mockRequestFile, option: project.prettierConfig })
-  }
-
-  prettierWrite({ data: option.indexFileContent, file: option.indexFile, option: project.prettierConfig })
+  writeFileSync(option.definitionFile, option.definitionFileContent)
+  writeFileSync(option.requestFile, option.requestFileContent)
+  writeFileSync(option.indexFile, option.indexFileContent)
 }

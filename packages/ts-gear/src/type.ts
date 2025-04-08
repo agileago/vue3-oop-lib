@@ -1,4 +1,3 @@
-import type { Options } from 'prettier'
 import type {
   BaseParameter,
   Operation,
@@ -11,11 +10,6 @@ import type {
   // Path,
 } from 'swagger-schema-official'
 import { tuple } from './tool/types'
-
-/** baidu and google can handle different language automatically
- * youdao must assign the language type
- * */
-export type TranslationEngine = 'baidu' | 'google'
 
 export const httpMethods = tuple('get', 'put', 'post', 'delete', 'options', 'head', 'patch')
 
@@ -147,8 +141,6 @@ export type PrepareToWrite = {
   requestFileContent: string
   definitionFile: string
   definitionFileContent: string
-  mockRequestFile: string
-  mockRequestFileContent: string
   indexFile: string
   indexFileContent: string
 }
@@ -160,15 +152,13 @@ export interface Project {
    * 工程名，会在dest指定的文件夹中生成对应的工程名文件夹
    * */
   name: string
-
   /**
    * the api files will be generated to
    * note: this directory is relative to this ts-gear config file
    * @example './service'
    * 目标文件夹，相对路径以当前'tsg.config.ts'为基准
    * */
-  dest: string
-
+  dest?: string
   /**
    * swagger doc path
    * could be remote or local json file
@@ -179,8 +169,7 @@ export interface Project {
    * openapi数据对应的网址，可以是远程或本地
    * 如果是本地文件，则相对路径以当前tsg.config.ts为基准
    * */
-  source: string
-
+  source?: string
   /**
    * the param for fetch swagger doc
    * see https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters
@@ -203,7 +192,7 @@ export interface Project {
    * @required
    * 引入自定义requester的模板字符串
    * */
-  importRequesterStatement: string
+  importRequesterStatement?: string
 
   /**
    * @default false
@@ -240,52 +229,6 @@ export interface Project {
    * 是否尝试生成范型，若报错则设置为false更保险一些
    * */
   keepGeneric?: boolean
-
-  /**
-   * if your swagger doc has some non english words in definitions keys or some $ref position,
-   * choose an engine to transate those words to english
-   * the translated results are not for human reading, but for program variable names.
-   * because translation depends on internet, you may need to retry some times to get results successfuly.
-   * once your api is generated, change to another engine and regenerate new api, the translate output will definitely be different, so the api content will be different too.
-   *
-   * most case you don`t need this option, try to persuade your teammate to correct the swagger doc to english is a better way.
-   * if there are unregular charator, and you can not fix it,
-   * try to use an engine provided by "translation.js"
-   * "baidu" or "google"
-   * 如果一些定义中有非英文字符，可以尝试添加翻译引擎
-   * */
-  translationEngine?: TranslationEngine
-
-  /**
-   * works with translationEngine assigned
-   * serial processing translate words
-   * when too many words should be translate, translate engine will eccor errors higher probability.
-   * when you do not need this, set this to false, and try again.
-   * @default true
-   */
-  translateSerial?: boolean
-
-  /**
-   * when too much translate words will definitely result translate request error
-   * add interval time between translate
-   * unit=milliseconds
-   * recommand > 2000
-   * @default 2000
-   */
-  translateIntervalPerWord?: number
-
-  /**
-   * show translate debug info
-   */
-  translateDebug?: boolean
-
-  /**
-   * generate mock data switch
-   * @default false
-   * 是否生成mock数据文件
-   * */
-  shouldGenerateMock?: boolean
-
   /**
    * should export request function option types
    * @default true
@@ -302,10 +245,9 @@ export interface Project {
   shouldExportResponseType?: boolean
 
   /**
-   * output content prettier config
-   * 生成代码的`prettier`格式化配置
+   * 生成代码之后是否使用prettier进行格式化
    * */
-  prettierConfig?: Options
+  prettierFormat?: boolean
 
   /**
    * generate request function name method
@@ -327,14 +269,6 @@ export interface Project {
       simpleOption: string
     },
   ) => string
-
-  /**
-   * need js file? OK, change this to true
-   * @default false
-   * 如果是非ts项目，可使用该项将结果转为js
-   * */
-  transformJS?: boolean
-
   /**
    * use cache
    * @default false

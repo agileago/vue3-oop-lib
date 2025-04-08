@@ -16,7 +16,6 @@ const projects: Project[] = [
     dest: 'service',
     source: 'https://petstore3.swagger.io/api/v3/openapi.json',
     importRequesterStatement: 'import { requester } from "../../requester"',
-    // simplifyRequestOption: true,
     shouldGenerateMock: true,
     EOL: '\n',
     withBasePath: true,
@@ -29,8 +28,6 @@ const projects: Project[] = [
     importRequesterStatement: 'import { requester } from "fffxx"',
     EOL: '\n',
     simplifyRequestOption: true,
-    // translationEngine: 'baidu',
-    // translateIntervalPerWord: 2000,
   },
   {
     name: 'v3',
@@ -48,11 +45,6 @@ const projects: Project[] = [
     source: '../../fixture/nullable.json',
     importRequesterStatement: 'import { requester } from "../../requester"',
     nullableFalseAsRequired: true,
-    // prettierConfig,
-    // shouldExportRequestOptionType: true,
-    // shouldExportResponseType: true,
-    // shouldGenerateMock: true,
-    // useCache: false,
   },
 ]
 

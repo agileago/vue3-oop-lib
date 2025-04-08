@@ -128,5 +128,3 @@ export const generateRequestContent = (spec: Spec, project: Project) => {
   /** return value only for test and debug */
   // return resultContent.join(EOL)
 }
-
-export * from './generateMockRequestContent'

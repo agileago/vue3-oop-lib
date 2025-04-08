@@ -27,16 +27,16 @@ export const processProject = async (project: Project, tsGearConfigPath: string)
   step.collectRefsInRequestAndPatchDefinition(project)
   step.generateDefinitionContent(project)
   step.generateRequestContent(spec, project)
-  if (project.shouldGenerateMock) {
-    step.generateMockRequestContent(spec, project)
-  }
+
   const writeResult = step.prepareWriteContent(project, tsGearConfigPath)
+
   if (project.hooks?.beforeWriteTs) {
     await project.hooks?.beforeWriteTs({
       project,
       ...writeResult,
     })
   }
+
   step.writeProject(project, writeResult)
 
   if (project.hooks?.afterWriteTs) {
@@ -44,10 +44,6 @@ export const processProject = async (project: Project, tsGearConfigPath: string)
       project,
       ...writeResult,
     })
-  }
-
-  if (project.transformJS) {
-    step.toJS(project, tsGearConfigPath)
   }
 
   restore(project)

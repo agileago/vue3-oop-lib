@@ -45,21 +45,6 @@ export const prepareWriteContent = (project: Project, tsGearConfigPath: string):
     requesterResult.code,
     requestContent,
   ].join(EOL)
-  let mockRequestFile = ''
-  let mockRequestFileContent = ''
-  if (project.shouldGenerateMock) {
-    const mockRequestContent = Object.getOwnPropertyNames(requestMap)
-      .map(name => requestMap[name].mockTypescriptContent)
-      .join(EOL)
-    mockRequestFile = join(dest, targetFileNames.mockRequest)
-    mockRequestFileContent = [
-      warningComment(EOL as string),
-      requesterResult.import,
-      importAllDefinition(project),
-      requesterResult.code,
-      mockRequestContent,
-    ].join(EOL)
-  }
 
   const indexFile = join(dest, targetFileNames.index)
   const indexFileContent = [warningComment(EOL as string), projectIndex()].join(EOL)
@@ -69,8 +54,6 @@ export const prepareWriteContent = (project: Project, tsGearConfigPath: string):
     requestFileContent,
     definitionFile,
     definitionFileContent,
-    mockRequestFile,
-    mockRequestFileContent,
     indexFile,
     indexFileContent,
   }

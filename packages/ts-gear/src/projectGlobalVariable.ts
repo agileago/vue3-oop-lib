@@ -3,8 +3,6 @@ import type { Project, ProjectGlobalMap } from './type'
 
 const projectGlobal: ProjectGlobalMap = {}
 
-// let currentProject: Project | undefined
-
 export const getGlobal = (project: Project) => {
   if (!projectGlobal[project.name]) {
     projectGlobal[project.name] = {

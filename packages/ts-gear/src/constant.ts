@@ -2,6 +2,8 @@ import type { Project } from './type'
 
 export const configFileName = 'tsg.config'
 
+export const configHttpFileName = 'http'
+
 export const defaultUseMockResponseStatement = 'process.env.NODE_ENV === "test"'
 
 export const targetFileNames = {
