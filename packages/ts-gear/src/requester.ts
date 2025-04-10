@@ -65,5 +65,5 @@ export const createRequester = (ax?: AxiosInstance | CreateAxiosDefaults) => {
     option = mergeConfig({ url, ...option }, config)
     return http.request(option) as Promise<T>
   }
-  return [ax, requester] as [AxiosInstance, RequesterWrapper]
+  return [http, requester] as [AxiosInstance, RequesterWrapper]
 }

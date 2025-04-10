@@ -1,5 +1,11 @@
 # @vue3-oop/ts-gear
 
+## 5.0.3
+
+### Patch Changes
+
+- 修复request返回axios实例
+
 ## 5.0.2
 
 ### Patch Changes

@@ -1,9 +1,9 @@
 {
-  "name": "project-name-monorepo",
+  "name": "vue3-oop-lib",
   "version": "0.0.1",
   "private": true,
   "packageManager": "pnpm@9.1.1",
-  "description": "Monorepo of project-name",
+  "description": "vue3-oop相关库",
   "type": "module",
   "license": "MIT",
   "scripts": {
