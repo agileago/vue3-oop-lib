@@ -52,7 +52,7 @@ export const fetchOpenapiData = async (project: Project, tsGearConfigPath: strin
     throw new Error(message)
   }
   if (!existsSync(source)) {
-    const message = 'json file does not exist'
+    const message = 'json 文件不存在'
     error(message)
     throw new Error(message)
   }

@@ -12,8 +12,8 @@ import type { Project } from './type'
  * */
 export const processProject = async (project: Project, tsGearConfigPath: string): Promise<void> => {
   step.processEOL(project)
-  step.prepareProjectDirectory(project, tsGearConfigPath)
   const spec = await step.fetchOpenapiData(project, tsGearConfigPath)
+  step.prepareProjectDirectory(project, tsGearConfigPath)
   const keepGeneric = project.keepGeneric !== false
   step.cleanRefAndDefinitionName(spec, keepGeneric)
   step.assembleSchemaToGlobal(spec, project)
@@ -55,10 +55,12 @@ export const runByCommand = async (): Promise<void> => {
     const [e] = await attemptAsync(() => processProject(project, tsGearConfigPath))
     if (!e) {
       info(`项目 ${project.name}: 生成成功`)
-      break
+      console.log('\n')
+      continue
     }
     error(`${project.name} 生成出现异常，错误如下`)
     console.error(e)
+    console.log('\n')
   }
   await formatWithPrettierIfAvailable(tsGearConfigPath)
 }
