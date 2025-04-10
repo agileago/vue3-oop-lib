@@ -1,5 +1,11 @@
 # @vue3-oop/ts-gear
 
+## 5.0.2
+
+### Patch Changes
+
+- 修复循环生成Bug
+
 ## 5.0.1
 
 ### Patch Changes
