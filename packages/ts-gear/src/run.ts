@@ -1,7 +1,8 @@
+import { attemptAsync } from 'es-toolkit'
 import { restore } from './projectGlobalVariable'
 import * as step from './step'
 import { formatWithPrettierIfAvailable } from './step/formatWithPrettier'
-import { info } from './tool/log'
+import { error, info } from './tool/log'
 import type { Project } from './type'
 
 /**
@@ -49,7 +50,16 @@ export const processProject = async (project: Project, tsGearConfigPath: string)
  * */
 export const runByCommand = async (): Promise<void> => {
   const { projects, tsGearConfigPath } = await step.getUserConfig()
-  await Promise.all(projects.map(project => processProject(project, tsGearConfigPath)))
+  for (const project of projects) {
+    info(`开始生成项目 ${project.name}:`)
+    const [e] = await attemptAsync(() => processProject(project, tsGearConfigPath))
+    if (!e) {
+      info(`项目 ${project.name}: 生成成功`)
+      break
+    }
+    error(`${project.name} 生成出现异常，错误如下`)
+    console.error(e)
+  }
   await formatWithPrettierIfAvailable(tsGearConfigPath)
 }
 

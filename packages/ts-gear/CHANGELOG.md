@@ -1,5 +1,11 @@
 # @vue3-oop/ts-gear
 
+## 5.0.1
+
+### Patch Changes
+
+- 实现json本地化
+
 ## 5.0.0
 
 ### Major Changes

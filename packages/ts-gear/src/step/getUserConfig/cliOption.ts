@@ -26,7 +26,7 @@ export const getCliOption = (): Result => {
       'assign project name, more names use comma split, like projectA,projectB',
       collectProjects,
     )
-    .option('-i, --init <init dir name>', `create ${configFileName}.ts config file`)
+    .option('-i, --init [init dir name]', `create ${configFileName}.ts config file`)
     .option('-c, --config <assign config file>', 'assign config file')
     .parse(process.argv)
 
@@ -44,8 +44,9 @@ export const getCliOption = (): Result => {
   if (options.config) {
     result.config = String(options.config).trim()
   }
-  if (options.init) {
-    result.init = String(options.init).trim()
+  if (options.init !== undefined) {
+    // 如果指定了 -i 选项但没有提供值，使用默认值 'src/api'
+    result.init = options.init === true ? 'src/api' : String(options.init).trim()
   }
   // if not delete commander cache
   // program will keep cache and break test

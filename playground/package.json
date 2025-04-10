@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "api": "tsg -c ./src/api/tsg.config.ts"
+    "api:init": "tsg -i",
+    "api": "tsg"
   },
   "dependencies": {
     "@abraham/reflection": "^0.12.0",

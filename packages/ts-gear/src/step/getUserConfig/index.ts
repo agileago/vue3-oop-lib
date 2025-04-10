@@ -30,7 +30,7 @@ function writeInitFile(configDir: string) {
 export const getUserConfig = async () => {
   const cwd = process.cwd()
   const cliOption = getCliOption()
-  const configDir = join(cwd, cliOption.init || 'src')
+  const configDir = join(cwd, cliOption.init || 'src/api')
   const configFilePath = join(configDir, `${configFileName}.ts`)
   if (cliOption.init) {
     if (existsSync(configFilePath)) {
@@ -51,7 +51,7 @@ export const getUserConfig = async () => {
       tsGearConfigPath: '',
     }
   }
-  const tsGearConfigPath = join(cwd, cliOption.config || join('src', configFileName))
+  const tsGearConfigPath = join(cwd, cliOption.config || join('src/api', configFileName))
   const config: any = await jiti.import(tsGearConfigPath)
   let projects = (config.default ? config.default : config) as Project[]
   const projectNamesFromCommandLine = cliOption.names
