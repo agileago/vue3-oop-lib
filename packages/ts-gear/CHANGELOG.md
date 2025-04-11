@@ -1,5 +1,11 @@
 # @vue3-oop/ts-gear
 
+## 5.0.4
+
+### Patch Changes
+
+- fix mergeConfig order params
+
 ## 5.0.3
 
 ### Patch Changes

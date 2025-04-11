@@ -62,7 +62,7 @@ export const createRequester = (ax?: AxiosInstance | CreateAxiosDefaults) => {
   const requester = <T>(apiUrl: string, param: RequestParameter = {}, config: AxiosRequestConfig = {}) => {
     // eslint-disable-next-line prefer-const
     let [url, option] = interceptRequest(apiUrl, param)
-    option = mergeConfig({ url, ...option }, config)
+    option = mergeConfig(config, { url, ...option })
     return http.request(option) as Promise<T>
   }
   return [http, requester] as [AxiosInstance, RequesterWrapper]
