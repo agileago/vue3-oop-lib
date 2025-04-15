@@ -1,0 +1,60 @@
+{
+  "name": "@vue3-oop/tailwind-preset",
+  "version": "1.0.1",
+  "description": "vue3-oop tailwindcss预设插件",
+  "keywords": [
+    "vue3-oop",
+    "tailwind-preset"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agileago/vue3-oop-lib.git",
+    "directory": "packages/tailwind-preset"
+  },
+  "bugs": {
+    "url": "https://github.com/agileago/vue3-oop-lib/issues"
+  },
+  "homepage": "https://github.com/agileago/vue3-oop-lib/tree/main/packages/tailwind-preset#readme",
+  "author": {
+    "name": "agileago",
+    "email": "593728759@qq.com"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./*": "./*"
+  },
+  "files": [
+    "dist",
+    "font",
+    "preflight.css",
+    "README.MD"
+  ],
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "prepublishOnly": "pnpm build"
+  },
+  "dependencies": {
+    "svgo": "^3.3.2",
+    "tailwindcss-rem2px-preset": "^1.0.3",
+    "tailwindcss-safe-area": "^0.5.1",
+    "ts-deepmerge": "^7.0.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3"
+  },
+  "peerDependencies": {
+    "tailwindcss": ">=3.2.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  }
+}

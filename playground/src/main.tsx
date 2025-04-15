@@ -1,5 +1,5 @@
 import '@abraham/reflection'
-import 'ant-design-vue/dist/reset.css'
+import './main.css'
 import { Component, Hook, Link, mergeRefs, Mut, VueComponent } from 'vue3-oop'
 import { createApp, shallowRef } from 'vue'
 import { ConfigProvider, Layout, Menu } from 'ant-design-vue'
@@ -39,9 +39,9 @@ class App extends VueComponent {
               onClick={() => {
                 throw new Error('hahaha')
               }}
-              style={{ color: '#fff', textAlign: 'center', lineHeight: '40px' }}
+              class={'text-biz-primary font-d-din-pro text-center leading-10'}
             >
-              VUE 示例
+              VUE 示例 11111 <i class={'i-arrow-top'}></i>
             </h2>
             <Menu theme={'dark'} mode={'inline'}>
               {routes.map(r => {
