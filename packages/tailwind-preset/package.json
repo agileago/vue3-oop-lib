@@ -1,6 +1,6 @@
 {
   "name": "@vue3-oop/tailwind-preset",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "vue3-oop tailwindcss预设插件",
   "keywords": [
     "vue3-oop",
