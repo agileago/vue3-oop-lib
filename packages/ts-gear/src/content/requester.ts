@@ -7,7 +7,7 @@ export const requester = (project: Project) => {
   if (project.importRequesterStatement) {
     const importStatement = renameImportStatementToRequester(
       typeof project.importRequesterStatement === 'function'
-        ? project.importRequesterStatement(project.name)
+        ? project.importRequesterStatement(project.name, project)
         : project.importRequesterStatement,
     )
     if (!importStatement) {

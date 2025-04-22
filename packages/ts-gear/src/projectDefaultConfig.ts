@@ -5,9 +5,14 @@ import type { Project } from './type'
 const requestTemplate: Project['generateRequestFunction'] = function (arg) {
   // 适配 fastApi 路径参数需要被path-to-regexp正确解析
   const path = arg.pathname.replace(/{(\w+?)}/g, (s, p1) => `:${p1}`)
-  let parameter = arg.parameterTypeName ? `option${!arg.parameterRequired ? '?' : ''}: ${arg.parameterTypeName}, ` : ''
+  // 入参是否需要外部泛型再次转换，主要针对所有参数现在必填比较麻烦
+  let parameterTypeName = arg.parameterTypeName
+  if (parameterTypeName && arg.project.paramGeneric) {
+    parameterTypeName = `${arg.project.paramGeneric}<${parameterTypeName}>`
+  }
+  let parameter = parameterTypeName ? `option${!arg.parameterRequired ? '?' : ''}: ${parameterTypeName}, ` : ''
   parameter += 'config?: AxiosRequestConfig'
-  const bodyData = arg.parameterTypeName ? `, ${arg.simpleOption ? arg.simpleOption : '...option'}` : ''
+  const bodyData = parameterTypeName ? `, ${arg.simpleOption ? arg.simpleOption : '...option'}` : ''
   const body = `requester<${arg.responseSuccessTypeName}>('${path}', { method: '${arg.httpMethod}'${bodyData}}, config)`
   return `(${parameter}) => ${body}`
 }
@@ -22,8 +27,11 @@ export const projectDefaultConfig: Partial<Project> = {
   stripBodyPropWhenOnlyOneBodyProp: true,
   nullableFalseAsRequired: true,
   simplifyRequestOption: true,
-  importRequesterStatement: name =>
-    `import { ${camelCase(name) + 'Requester'}, type AxiosRequestConfig } from '../http'`,
+  paramGeneric: 'DeepPartial',
+  importRequesterStatement: (name, project) => {
+    const paramGeneric = project.paramGeneric ? `, type ${project.paramGeneric}` : ''
+    return `import { ${camelCase(name) + 'Requester'}, type AxiosRequestConfig${paramGeneric} } from '../http'`
+  },
   // 生成请求函数名称
   generateRequestFunctionName(arg, name) {
     return 'api' + upperFirst(camelCase(name)) + upperFirst(generateRequestFunctionName(arg))

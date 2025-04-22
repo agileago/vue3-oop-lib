@@ -63,7 +63,7 @@ export const getUserConfig = async () => {
   }
 
   // 配置默认的项目配置
-  projects.forEach(project => Object.assign(project, projectDefaultConfig))
+  projects = projects.map(project => Object.assign({}, projectDefaultConfig, project))
 
   return {
     tsGearConfigPath: dirname(tsGearConfigPath),

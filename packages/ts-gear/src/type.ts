@@ -192,7 +192,7 @@ export interface Project {
    * @required
    * 引入自定义requester的模板字符串
    * */
-  importRequesterStatement?: string | ((name: string) => string)
+  importRequesterStatement?: string | ((name: string, project: Project) => string)
 
   /**
    * @default false
@@ -378,4 +378,9 @@ export interface Project {
     ) => Promise<any>
     afterWriteTs?: (o: { project: Project } & PrepareToWrite) => Promise<any>
   }
+
+  /**
+   * 参数泛型包装 默认为 DeepPartial 从ts-essential 导入
+   */
+  paramGeneric?: string
 }

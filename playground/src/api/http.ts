@@ -1,11 +1,12 @@
 import { createRequester, type RequestParameter } from '@vue3-oop/ts-gear/requester'
 import axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios'
+import type { DeepPartial } from 'ts-essentials'
 
 axios.defaults.timeout = 20000
 
 // region 类型转换
 
-export type { AxiosRequestConfig }
+export type { AxiosRequestConfig, DeepPartial }
 
 interface RdfaResult {
   code?: string

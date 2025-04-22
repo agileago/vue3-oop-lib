@@ -206,6 +206,9 @@ importers:
       injection-js:
         specifier: ^2.4.0
         version: 2.4.0
+      ts-essentials:
+        specifier: ^10.0.4
+        version: 10.0.4(typescript@5.8.2)
       tslib:
         specifier: ^2.8.1
         version: 2.8.1
@@ -3472,6 +3475,14 @@ packages:
   ts-deepmerge@7.0.2:
     resolution: {integrity: sha512-akcpDTPuez4xzULo5NwuoKwYRtjQJ9eoNfBACiBMaXwNAx7B1PKfe5wqUFJuW5uKzQ68YjDFwPaWHDG1KnFGsA==}
     engines: {node: '>=14.13.1'}
+
+  ts-essentials@10.0.4:
+    resolution: {integrity: sha512-lwYdz28+S4nicm+jFi6V58LaAIpxzhg9rLdgNC1VsdP/xiFBseGhF1M/shwCk6zMmwahBZdXcl34LVHrEang3A==}
+    peerDependencies:
+      typescript: '>=4.5.0'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
 
   ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
@@ -7374,6 +7385,10 @@ snapshots:
       typescript: 5.8.2
 
   ts-deepmerge@7.0.2: {}
+
+  ts-essentials@10.0.4(typescript@5.8.2):
+    optionalDependencies:
+      typescript: 5.8.2
 
   ts-interface-checker@0.1.13: {}
 

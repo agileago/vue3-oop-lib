@@ -1,5 +1,11 @@
 # @vue3-oop/ts-gear
 
+## 5.0.5
+
+### Patch Changes
+
+- 新增pramaGeneric请求参数泛型包裹
+
 ## 5.0.4
 
 ### Patch Changes
