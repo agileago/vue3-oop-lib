@@ -9,6 +9,10 @@ export default {
           primary: '#276ff5',
         },
       },
+      useNumberFont: true,
+      webFonts: {
+        puhui: [{ path: '/src/fonts/AlibabaPuHuiTi-3-55-Regular.otf' }],
+      },
     }),
   ],
 } satisfies Partial<Config>

@@ -60,6 +60,9 @@ const SimpleComponent = defineComponent(() => {
     <div>
       <h2>简单组件定义</h2>
       <h3>函数组件</h3>
+      <div class={'icon-arrow-top text-red-400'}></div>
+      <div class={'font-d-din-pro'}>1122</div>
+      <div class={'font-puhui'}>任建华</div>
       <SimpleFuncComponent count={20}></SimpleFuncComponent>
       <SimpleStateComponent initialValue={10}></SimpleStateComponent>
       <button onClick={() => (init.value = init.value ? undefined : 10)}>切换默认值</button>

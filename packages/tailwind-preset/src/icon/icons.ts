@@ -34,7 +34,8 @@ export function readDirectoryRecursively(directory: string, rootDir: string) {
             isMask: source.includes('currentColor'),
           })
         } catch (err) {
-          console.error('juan tailwindcss-svg-icon error:', filePath)
+          console.error(err)
+          console.warn('filepath:', filePath)
         }
       }
     })

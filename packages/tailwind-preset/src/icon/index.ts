@@ -5,7 +5,7 @@ import { getIcons } from './icons'
 export function svgIconPlugin(options: JuanOptions = {}) {
   if (options?.useSvgIcon === false) return plugin(() => {})
 
-  const { iconClassPrefix = 'i', iconPath = 'src/icons' } = options
+  const { iconClassPrefix = 'icon', iconPath = 'src/icons' } = options
 
   const icons = getIcons(iconPath)
 
@@ -27,6 +27,7 @@ export function svgIconPlugin(options: JuanOptions = {}) {
             '--icon': `url("${value.base64}")`,
             'flex-shrink': 0,
             ...defaultProps,
+            ...options.extraIconProps,
           }
 
           if (isMask) {
@@ -34,6 +35,8 @@ export function svgIconPlugin(options: JuanOptions = {}) {
               ...props,
               mask: 'var(--icon) no-repeat',
               'mask-size': '100% 100%',
+              '-webkit-mask': 'var(--icon) no-repeat',
+              '-webkit-mask-size': '100% 100%',
               'background-color': 'currentColor',
             }
           }
