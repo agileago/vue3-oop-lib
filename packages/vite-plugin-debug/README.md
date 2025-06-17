@@ -1,4 +1,4 @@
-# 聚安移动端调试vite插件
+# 移动端调试vite插件
 
 ## 痛点
 
@@ -12,16 +12,16 @@
 - 默认配置只有在`icome`环境中加载
 - 支持`url`参数 `isDebug=1` 直接展示
 - 支持在生产环境通过事件异步触发插件加载
-- 添加icome实用功能按钮
+- 添加钉钉实用功能按钮
 
 ## 如何使用
 
 ```shell
-enpm add @enn/vite-plugin-debug -D
+pnpm add @vue3-oop/vite-plugin-debug -D
 ```
 
 ```ts
-import webviewDebug from '@enn/vite-plugin-debug'
+import webviewDebug from '@vue3-oop/vite-plugin-debug'
 
 export default defineConfig({
   plugins: [webviewDebug()],
@@ -57,8 +57,6 @@ const config = {
     uat: 'event',
     prod: 'event',
   },
-  uaFilter: () => {
-    return window.navigator.userAgent.toLowerCase().indexOf('dingtalk') > -1
-  },
+  uaFilter: ['dingtalk', 'micromessenger'],
 }
 ```
