@@ -34,14 +34,16 @@ export default defineConfig({
 在业务代码中使用：
 
 ```ts
-// 通过全局变量访问版本信息
-console.log(VERSION_INFO.name)     // 项目名称
-console.log(VERSION_INFO.version)  // 版本号
-console.log(VERSION_INFO.buildTime) // 构建时间
-console.log(VERSION_INFO.gitTag)   // Git标签
+// 只能在浏览器端通过window对象访问版本信息
+console.log(window.VERSION_INFO.name)     // 项目名称
+console.log(window.VERSION_INFO.version)  // 版本号
+console.log(window.VERSION_INFO.buildTime) // 构建时间
+console.log(window.VERSION_INFO.gitTag)   // Git标签
 
-// 或者通过window对象访问
-console.log(window.VERSION_INFO)
+// 或者先检查是否存在
+if (window.VERSION_INFO) {
+  console.log('当前版本:', window.VERSION_INFO.version)
+}
 ```
 
 ## 配置项

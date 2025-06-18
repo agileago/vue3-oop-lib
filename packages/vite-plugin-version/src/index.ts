@@ -87,17 +87,7 @@ export default function versionPlugin(options: VersionPluginOptions = {}): Plugi
       isDev = config.command === 'serve'
       versionInfo = generateVersionInfo(config.root)
     },
-    config(config, { command }) {
-      // 在这里先初始化versionInfo，因为config钩子在configResolved之前执行
-      const tempVersionInfo = generateVersionInfo(config.root || process.cwd())
-
-      // 注入全局变量
-      if (!config.define) {
-        config.define = {}
-      }
-      config.define.__VERSION_INFO__ = JSON.stringify(tempVersionInfo)
-      config.define.VERSION_INFO = JSON.stringify(tempVersionInfo)
-    },
+    // 移除config钩子，不在构建时注入全局变量，只在浏览器端注入
     transformIndexHtml: {
       order: 'pre',
       handler(html) {
@@ -118,16 +108,6 @@ export default function versionPlugin(options: VersionPluginOptions = {}): Plugi
         type: 'asset',
         fileName,
         source: JSON.stringify(versionInfo, null, 2),
-      })
-    },
-    configureServer(server) {
-      // 开发模式下也注入全局变量
-      server.middlewares.use((req, res, next) => {
-        if (req.url === '/') {
-          // 确保开发模式下也能访问到版本信息
-          res.setHeader('X-Version-Info', JSON.stringify(versionInfo))
-        }
-        next()
       })
     },
   }
