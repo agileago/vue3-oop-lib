@@ -1,0 +1,58 @@
+{
+  "name": "@vue3-oop/vite-plugin-version",
+  "version": "1.0.2",
+  "description": "vite构建信息插件",
+  "keywords": [
+    "vite plugin",
+    "version info"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agileago/vue3-oop-lib.git",
+    "directory": "packages/vite-plugin-version"
+  },
+  "bugs": {
+    "url": "https://github.com/agileago/vue3-oop-lib/issues"
+  },
+  "homepage": "https://github.com/agileago/vue3-oop-lib/tree/main/packages/vite-plugin-version#readme",
+  "author": {
+    "name": "agileago",
+    "email": "593728759@qq.com"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./dist/*": "./dist/*",
+    "./client": {
+      "types": "./client.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "client.d.ts",
+    "README.MD"
+  ],
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "prepublishOnly": "pnpm build"
+  },
+  "dependencies": {
+    "es-toolkit": "^1.39.3"
+  },
+  "peerDependencies": {
+    "vite": ">=4.0.0"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  }
+}

@@ -198,6 +198,15 @@ importers:
         specifier: '>=4.0.0'
         version: 6.2.6(@types/node@22.13.14)(jiti@2.4.2)(tsx@4.19.3)(yaml@2.7.0)
 
+  packages/vite-plugin-version:
+    dependencies:
+      es-toolkit:
+        specifier: ^1.39.3
+        version: 1.39.3
+      vite:
+        specifier: '>=4.0.0'
+        version: 6.2.6(@types/node@22.13.14)(jiti@2.4.2)(tsx@4.19.3)(yaml@2.7.0)
+
   playground:
     dependencies:
       '@abraham/reflection':
@@ -246,6 +255,9 @@ importers:
       '@vue3-oop/vite-plugin-debug':
         specifier: workspace:*
         version: link:../packages/vite-plugin-debug
+      '@vue3-oop/vite-plugin-version':
+        specifier: workspace:*
+        version: link:../packages/vite-plugin-version
       postcss:
         specifier: ^8.5.3
         version: 8.5.3
@@ -1841,6 +1853,9 @@ packages:
 
   es-toolkit@1.34.1:
     resolution: {integrity: sha512-OA6cd94fJV9bm8dWhIySkWq4xV+rAQnBZUr2dnpXam0QJ8c+hurLbKA8/QooL9Mx4WCAxvIDsiEkid5KPQ5xgQ==}
+
+  es-toolkit@1.39.3:
+    resolution: {integrity: sha512-Qb/TCFCldgOy8lZ5uC7nLGdqJwSabkQiYQShmw4jyiPk1pZzaYWTwaYKYP7EgLccWYgZocMrtItrwh683voaww==}
 
   esbuild@0.25.0:
     resolution: {integrity: sha512-BXq5mqc8ltbaN34cDqWuYKyNhX8D/Z0J1xdtdQ8UcIIIyJyz+ZMKUt58tF3SrZ85jcfN/PZYhjR5uDQAYNVbuw==}
@@ -5738,6 +5753,8 @@ snapshots:
       is-symbol: 1.1.1
 
   es-toolkit@1.34.1: {}
+
+  es-toolkit@1.39.3: {}
 
   esbuild@0.25.0:
     optionalDependencies:
