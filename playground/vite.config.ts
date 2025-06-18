@@ -11,6 +11,11 @@ export default defineConfig({
       console: true,
       generateFile: true,
       fileName: 'version.json',
+      extraInfo: {
+        author: 'Your Name',
+        buildEnv: 'production',
+        customField: 'custom value',
+      },
     }),
   ],
 })

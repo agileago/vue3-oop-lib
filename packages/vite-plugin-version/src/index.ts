@@ -1,6 +1,6 @@
-import { execSync } from 'child_process'
-import { readFileSync } from 'fs'
-import { resolve } from 'path'
+import { execSync } from 'node:child_process'
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import type { Plugin } from 'vite'
 
 export interface VersionInfo {
@@ -8,6 +8,8 @@ export interface VersionInfo {
   version: string
   buildTime: string
   gitTag: string
+  mode: string
+  extraInfo?: Record<string, any>
 }
 
 export interface VersionPluginOptions {
@@ -17,18 +19,16 @@ export interface VersionPluginOptions {
   generateFile?: boolean
   /** 生成的JSON文件名 */
   fileName?: string
+  /** 额外信息，用户可以传入自定义信息 */
+  extraInfo?: Record<string, any>
 }
 
 function getGitTag(): string {
   try {
-    return execSync('git describe --tags --abbrev=0', { encoding: 'utf8' }).trim()
+    // 直接获取最新的commit hash
+    return execSync('git rev-parse HEAD', { encoding: 'utf8' }).trim()
   } catch {
-    try {
-      // 如果没有tag，尝试获取最新的commit hash
-      return execSync('git rev-parse --short HEAD', { encoding: 'utf8' }).trim()
-    } catch {
-      return 'unknown'
-    }
+    return 'unknown'
   }
 }
 
@@ -37,7 +37,7 @@ function getPackageInfo(root: string): { name: string; version: string } {
     const packageJsonPath = resolve(root, 'package.json')
     const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'))
     return {
-      name: packageJson.name || 'unknown',
+      name: packageJson.description || packageJson.name || 'unknown',
       version: packageJson.version || 'unknown',
     }
   } catch {
@@ -48,9 +48,22 @@ function getPackageInfo(root: string): { name: string; version: string } {
   }
 }
 
-function generateVersionInfo(root: string): VersionInfo {
+function generateVersionInfo(root: string, mode: string, extraInfo?: Record<string, any>): VersionInfo {
   const { name, version } = getPackageInfo(root)
-  const buildTime = new Date().toISOString()
+  const date = new Date()
+  // 使用本地时间格式，避免硬编码时区偏移
+  const buildTime = date
+    .toLocaleString('zh-CN', {
+      timeZone: 'Asia/Shanghai',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    })
+    .replace(/\//g, '-')
   const gitTag = getGitTag()
 
   return {
@@ -58,25 +71,70 @@ function generateVersionInfo(root: string): VersionInfo {
     version,
     buildTime,
     gitTag,
+    mode,
+    ...(extraInfo && { extraInfo }),
   }
 }
 
 function createConsoleScript(versionInfo: VersionInfo): string {
+  // 通用高对比度配色方案，适配所有模式
+  const colors = {
+    primary: '#2563eb',
+    secondary: '#6b7280',
+    success: '#16a34a',
+    warning: '#ea580c',
+    background: '#f8fafc',
+    border: '#94a3b8',
+    text: '#1e293b',
+  }
+
+  // 统一的样式生成函数
+  const createLabelStyle = () =>
+    `color: ${colors.secondary}; background: ${colors.background}; padding: 4px 8px; border-radius: 4px; font-weight: normal;`
+  const createValueStyle = (color = colors.text, bold = false) =>
+    `color: ${color}; background: ${colors.background}; padding: 4px 8px; border-radius: 4px; font-weight: ${bold ? 'bold' : 'normal'};`
+
+  // 生成额外信息日志
+  let extraInfoLogs = ''
+  if (versionInfo.extraInfo) {
+    for (const [key, value] of Object.entries(versionInfo.extraInfo)) {
+      const displayValue = typeof value === 'string' ? value : JSON.stringify(value)
+      extraInfoLogs += `console.log('%c📋 ${key}: %c${displayValue}', '${createLabelStyle()}', '${createValueStyle()}')\n`
+    }
+  }
+
   return `
 // 将版本信息挂载到window对象
 window.VERSION_INFO = ${JSON.stringify(versionInfo)};
 
-console.group('%c📦 Version Info', 'color: #409eff; font-weight: bold; font-size: 14px;');
-console.log('%c项目名称:', 'color: #67c23a; font-weight: bold;', '${versionInfo.name}');
-console.log('%c版本号:', 'color: #67c23a; font-weight: bold;', '${versionInfo.version}');
-console.log('%c构建时间:', 'color: #67c23a; font-weight: bold;', '${versionInfo.buildTime}');
-console.log('%cGit Tag:', 'color: #67c23a; font-weight: bold;', '${versionInfo.gitTag}');
-console.groupEnd();
+// 通用高对比度配色方案，适配所有模式
+const colors = {
+  primary: '${colors.primary}',
+  secondary: '${colors.secondary}',
+  success: '${colors.success}',
+  warning: '${colors.warning}',
+  background: '${colors.background}',
+  border: '${colors.border}',
+  text: '${colors.text}'
+};
+
+// 统一的样式生成函数
+const createLabelStyle = () => \`color: \${colors.secondary}; background: \${colors.background}; padding: 4px 8px; border-radius: 4px; font-weight: normal;\`;
+const createValueStyle = (color = colors.text, bold = false) => \`color: \${color}; background: \${colors.background}; padding: 4px 8px; border-radius: 4px; font-weight: \${bold ? 'bold' : 'normal'};\`;
+const createHeaderStyle = () => \`background: \${colors.background}; color: \${colors.text}; padding: 8px 12px; border-radius: 6px; border: 1px solid \${colors.border}; font-weight: bold; font-size: 14px;\`;
+
+// 简洁的项目信息展示
+console.group('%c📦 ${versionInfo.name}', createHeaderStyle());
+console.log('%c🏷️ 版本: %c${versionInfo.version}', createLabelStyle(), createValueStyle(colors.primary, true));
+console.log('%c🔨 构建: %c${versionInfo.buildTime}', createLabelStyle(), createValueStyle());
+console.log('%c📝 提交: %c${versionInfo.gitTag}', createLabelStyle(), createValueStyle());
+console.log('%c⚙️ 模式: %c${versionInfo.mode}', createLabelStyle(), createValueStyle(colors.success, true));
+${extraInfoLogs}console.groupEnd();
 `
 }
 
 export default function versionPlugin(options: VersionPluginOptions = {}): Plugin {
-  const { console: enableConsole = true, generateFile = true, fileName = 'version.json' } = options
+  const { console: enableConsole = true, generateFile = true, fileName = 'version.json', extraInfo } = options
 
   let versionInfo: VersionInfo
   let isDev = false
@@ -85,7 +143,8 @@ export default function versionPlugin(options: VersionPluginOptions = {}): Plugi
     name: 'vite-plugin-version',
     configResolved(config) {
       isDev = config.command === 'serve'
-      versionInfo = generateVersionInfo(config.root)
+      const mode = config.mode || (isDev ? 'development' : 'production')
+      versionInfo = generateVersionInfo(config.root, mode, extraInfo)
     },
     // 移除config钩子，不在构建时注入全局变量，只在浏览器端注入
     transformIndexHtml: {

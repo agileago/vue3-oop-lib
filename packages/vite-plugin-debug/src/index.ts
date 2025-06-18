@@ -27,7 +27,7 @@ export interface IDebugConfig {
   /**
    * 是否添加icome账号退出代码
    */
-  icomeAuthCode?: string
+  icomeAuthCode?: boolean
   /**
    * 是否展示 debug 插件过滤条件，一般用于判断ua
    * 默认 在钉钉和微信浏览器打开

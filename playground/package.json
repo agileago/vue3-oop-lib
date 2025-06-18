@@ -1,5 +1,6 @@
 {
   "name": "playground",
+  "description": "安全风险智能地图",
   "version": "1.0.0",
   "private": true,
   "type": "module",

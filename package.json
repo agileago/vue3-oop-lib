@@ -15,7 +15,8 @@
     "release:change": "changeset",
     "release:version": "changeset version && pnpm install",
     "release": "pnpm publish -r",
-    "prepare": "simple-git-hooks"
+    "prepare": "simple-git-hooks",
+    "playground": "pnpm run --filter=./playground dev"
   },
   "commitlint": {
     "extends": [
