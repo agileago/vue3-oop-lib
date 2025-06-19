@@ -72,11 +72,11 @@ function generateVersionInfo(root: string, mode: string, extraInfo?: Record<stri
     buildTime,
     gitTag,
     mode,
-    ...(extraInfo && { extraInfo }),
+    ...extraInfo,
   }
 }
 
-function createConsoleScript(versionInfo: VersionInfo): string {
+function createConsoleScript(versionInfo: VersionInfo, extraInfo?: Record<string, any>): string {
   // 通用高对比度配色方案，适配所有模式
   const colors = {
     primary: '#2563eb',
@@ -88,24 +88,17 @@ function createConsoleScript(versionInfo: VersionInfo): string {
     text: '#1e293b',
   }
 
-  // 统一的样式生成函数
-  const createLabelStyle = () =>
-    `color: ${colors.secondary}; background: ${colors.background}; padding: 4px 8px; border-radius: 4px; font-weight: normal;`
-  const createValueStyle = (color = colors.text, bold = false) =>
-    `color: ${color}; background: ${colors.background}; padding: 4px 8px; border-radius: 4px; font-weight: ${bold ? 'bold' : 'normal'};`
-
   // 生成额外信息日志
   let extraInfoLogs = ''
-  if (versionInfo.extraInfo) {
-    for (const [key, value] of Object.entries(versionInfo.extraInfo)) {
+  if (extraInfo) {
+    for (const [key, value] of Object.entries(extraInfo)) {
       const displayValue = typeof value === 'string' ? value : JSON.stringify(value)
-      extraInfoLogs += `console.log('%c📋 ${key}: %c${displayValue}', '${createLabelStyle()}', '${createValueStyle()}')\n`
+      extraInfoLogs += `console.log('%c📋 ${key}: %c${displayValue}', createLabelStyle(), createValueStyle());\n`
     }
   }
 
   return `
-// 将版本信息挂载到window对象
-window.VERSION_INFO = ${JSON.stringify(versionInfo)};
+window.VERSION_INFO = ${JSON.stringify(versionInfo, undefined, 2)};
 
 // 通用高对比度配色方案，适配所有模式
 const colors = {
@@ -152,7 +145,7 @@ export default function versionPlugin(options: VersionPluginOptions = {}): Plugi
       handler(html) {
         if (!enableConsole) return html
 
-        const consoleScript = createConsoleScript(versionInfo)
+        const consoleScript = createConsoleScript(versionInfo, extraInfo)
         const scriptTag = `<script>${consoleScript}</script>`
 
         // 在head标签结束前插入脚本

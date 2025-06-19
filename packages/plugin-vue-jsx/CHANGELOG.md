@@ -1,5 +1,11 @@
 # @vue3-oop/plugin-vue-jsx
 
+## 1.5.1
+
+### Patch Changes
+
+- 增加version包
+
 ## 1.5.0
 
 ### Minor Changes

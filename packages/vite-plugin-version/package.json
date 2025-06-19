@@ -1,6 +1,6 @@
 {
   "name": "@vue3-oop/vite-plugin-version",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "vite构建信息插件",
   "keywords": [
     "vite plugin",
