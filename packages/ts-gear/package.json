@@ -1,6 +1,6 @@
 {
   "name": "@vue3-oop/ts-gear",
-  "version": "5.0.5",
+  "version": "5.0.6",
   "packageManager": "pnpm@9.1.1",
   "description": "swagger to typescript request code",
   "type": "module",

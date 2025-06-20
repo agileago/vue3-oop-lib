@@ -35,26 +35,30 @@ export const fetchOpenapiData = async (project: Project, tsGearConfigPath: strin
       url = ''
     } else {
       const swaggerSchema = json5.parse(await res!.text())
-      info(`got swagger spec doc from ${verbose}`)
-      // 写入本地文件
-      if (!existsSync(dirname(localFilePath))) {
-        mkdirp.sync(dirname(localFilePath))
-      }
-      writeFileSync(localFilePath, JSON.stringify(swaggerSchema, null, 2))
+      info(`已获取到swagger数据 ${verbose}`)
       return swaggerSchema
     }
   }
   const source = url ? join(tsGearConfigPath, url) : localFilePath
   // use require for json file
   if (!source.endsWith('.json')) {
-    const message = 'user config file should ends with `.json`'
+    const message = '用户配置文件必须以 `.json` 结尾'
     error(message)
     throw new Error(message)
   }
   if (!existsSync(source)) {
-    const message = 'json 文件不存在'
+    const message = '本地swagger json 文件不存在'
     error(message)
     throw new Error(message)
   }
   return require(source)
+}
+
+export const backupOpenapiData = (project: Project, tsGearConfigPath: string, swaggerSchema: string) => {
+  const localFilePath = join(tsGearConfigPath, DEFAULT_OPENAPI_DIR, project.name + '.json')
+  // 写入本地文件
+  if (!existsSync(dirname(localFilePath))) {
+    mkdirp.sync(dirname(localFilePath))
+  }
+  writeFileSync(localFilePath, swaggerSchema)
 }

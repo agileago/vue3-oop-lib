@@ -1,5 +1,11 @@
 # @vue3-oop/ts-gear
 
+## 5.0.6
+
+### Patch Changes
+
+- 更友好的错误信息
+
 ## 5.0.5
 
 ### Patch Changes

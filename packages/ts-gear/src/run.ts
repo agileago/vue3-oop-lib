@@ -13,6 +13,7 @@ import type { Project } from './type'
 export const processProject = async (project: Project, tsGearConfigPath: string): Promise<void> => {
   step.processEOL(project)
   const spec = await step.fetchOpenapiData(project, tsGearConfigPath)
+  const swaggerSchema = JSON.stringify(spec, null, 2)
   step.prepareProjectDirectory(project, tsGearConfigPath)
   const keepGeneric = project.keepGeneric !== false
   step.cleanRefAndDefinitionName(spec, keepGeneric)
@@ -42,6 +43,9 @@ export const processProject = async (project: Project, tsGearConfigPath: string)
     })
   }
 
+  // 存入本地备份
+  step.backupOpenapiData(project, tsGearConfigPath, swaggerSchema)
+
   restore(project)
 }
 
@@ -58,7 +62,7 @@ export const runByCommand = async (): Promise<void> => {
       console.log('\n')
       continue
     }
-    error(`${project.name} 生成出现异常，错误如下`)
+    error(`${project.name} 生成出现异常，请检查swagger中是否存在中文，错误如下`)
     console.error(e)
     console.log('\n')
   }
