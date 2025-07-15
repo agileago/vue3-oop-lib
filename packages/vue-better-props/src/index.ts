@@ -25,3 +25,4 @@ export function defineComponent<
   }) as any
 }
 export * from './service'
+export * from './component'
