@@ -33,6 +33,7 @@
     "@vue3-oop/ts-gear": "workspace:*",
     "@vue3-oop/tailwind-preset": "workspace:*",
     "@vue3-oop/vite-plugin-debug": "workspace:*",
-    "@vue3-oop/vite-plugin-version": "workspace:*"
+    "@vue3-oop/vite-plugin-version": "workspace:*",
+    "vue-better-props": "workspace:*"
   }
 }

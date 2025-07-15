@@ -1,0 +1,51 @@
+{
+  "name": "vue-better-props",
+  "version": "0.0.2",
+  "description": "vue3 best props",
+  "keywords": [
+    "vue3",
+    "best props"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agileago/vue3-oop-lib.git",
+    "directory": "packages/vue-better-props"
+  },
+  "bugs": {
+    "url": "https://github.com/agileago/vue3-oop-lib/issues"
+  },
+  "homepage": "https://github.com/agileago/vue3-oop-lib/tree/main/packages/vue-better-props#readme",
+  "author": {
+    "name": "agileago",
+    "email": "593728759@qq.com"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./*": "./*"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "prepublishOnly": "pnpm build"
+  },
+  "devDependencies": {
+    "vue": "^3.5.17"
+  },
+  "peerDependencies": {
+    "vue": ">=3"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  }
+}

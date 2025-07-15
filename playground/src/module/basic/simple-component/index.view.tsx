@@ -1,5 +1,11 @@
 import { ref } from 'vue'
-import { defineComponent, useClassAndStyle, type ClassAndStyleProps } from 'vue3-oop'
+import {
+  defineComponent,
+  injectService,
+  provideService,
+  useClassAndStyle,
+  type ClassAndStyleProps,
+} from 'vue-better-props'
 
 // region 函数组件
 export interface SimpleFuncComponentProps extends ClassAndStyleProps {
@@ -10,6 +16,11 @@ export function SimpleFuncComponent(props: SimpleFuncComponentProps) {
 }
 // endregion
 
+// region 服务
+class CountService {
+  count = ref(0)
+}
+
 // region 状态带属性组件
 export interface SimpleStateComponentProps {
   initialValue?: number
@@ -18,8 +29,10 @@ export interface SimpleStateComponentProps {
 export const SimpleStateComponent = defineComponent(function SimpleStateComponent(props: SimpleStateComponentProps) {
   const classAndStyle = useClassAndStyle()
   const count = ref(props.initialValue || 0)
+  const cs = injectService(CountService)
   return () => (
     <div {...classAndStyle}>
+      <span onClick={() => cs.count.value++}>{cs.count.value}</span>
       <input type={'number'} v-model={count.value} />
     </div>
   )
@@ -55,6 +68,9 @@ export const SimpleStateWithDefaultValueComponent = defineComponent(
 // 简单状态组件定义
 const SimpleComponent = defineComponent(() => {
   const init = ref<undefined | number>(10)
+  const cs = new CountService()
+  provideService(cs)
+  console.log(cs)
 
   return () => (
     <div>
