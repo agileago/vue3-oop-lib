@@ -1,3 +1,5 @@
+node-linker: hoisted
+link-workspace-packages: true
 packages:
   - packages/*
   - playground
