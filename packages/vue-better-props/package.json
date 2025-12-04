@@ -1,6 +1,6 @@
 {
   "name": "vue-better-props",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "vue3 best props",
   "keywords": [
     "vue3",
@@ -39,7 +39,7 @@
     "prepublishOnly": "pnpm build"
   },
   "devDependencies": {
-    "vue": "^3.5.17"
+    "vue": "^3.5.25"
   },
   "peerDependencies": {
     "vue": ">=3"

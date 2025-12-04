@@ -1,6 +1,6 @@
 {
   "name": "@vue3-oop/ts-gear",
-  "version": "5.0.6",
+  "version": "5.0.7",
   "packageManager": "pnpm@9.1.1",
   "description": "swagger to typescript request code",
   "type": "module",
@@ -49,39 +49,39 @@
   },
   "dependencies": {
     "@types/swagger-schema-official": "^2.0.25",
-    "app-root-path": "^3.0.0",
-    "chalk": "^2.4.2",
-    "commander": "^8.2.0",
+    "app-root-path": "^3.1.0",
+    "chalk": "^5.6.2",
+    "commander": "^14.0.2",
     "cross-fetch": "^4.1.0",
-    "fs-extra": "^7.0.1",
+    "es-toolkit": "^1.42.0",
+    "fs-extra": "^11.3.2",
+    "jiti": "^2.6.1",
     "json5": "^2.2.3",
-    "es-toolkit": "^1.34.1",
-    "mkdirp": "^1.0.4",
-    "openapi3-ts": "^1.4.0",
-    "prompts": "^2.4.1",
-    "rimraf": "^3.0.2",
-    "swagger-schema-official": "^2.0.0-bab6bed",
-    "traverse": "^0.6.6",
-    "ts-morph": "^18.0.0",
-    "url-join": "^5.0.0",
-    "jiti": "^2.4.2"
+    "mkdirp": "^3.0.1",
+    "openapi3-ts": "^4.5.0",
+    "prompts": "^2.4.2",
+    "rimraf": "^6.1.2",
+    "swagger-schema-official": "2.0.0-bab6bed",
+    "traverse": "^0.6.11",
+    "ts-morph": "^27.0.2",
+    "url-join": "^5.0.0"
   },
   "devDependencies": {
+    "@types/app-root-path": "^3.1.0",
+    "@types/cosmiconfig": "^6.0.3",
+    "@types/fs-extra": "^11.0.4",
+    "@types/mkdirp": "^2.0.0",
+    "@types/node": "^24.10.1",
     "@types/prompts": "^2.4.9",
-    "@types/app-root-path": "^1.2.4",
-    "@types/cosmiconfig": "^5.0.3",
-    "@types/fs-extra": "^5.0.5",
-    "@types/mkdirp": "^1.0.0",
-    "@types/node": "^16.18.126",
-    "@types/rimraf": "^2.0.3",
-    "@types/traverse": "^0.6.25-alpha",
-    "tsx": "^4.19.3",
-    "axios": "^1.8.4",
-    "path-to-regexp": "^8.2.0"
+    "@types/rimraf": "^4.0.5",
+    "@types/traverse": "^0.6.37",
+    "axios": "^1.13.2",
+    "path-to-regexp": "^8.3.0",
+    "tsx": "^4.21.0"
   },
   "peerDependencies": {
-    "typescript": ">=4",
     "axios": "*",
-    "path-to-regexp": "*"
+    "path-to-regexp": "^3.3.0",
+    "typescript": ">=4"
   }
 }

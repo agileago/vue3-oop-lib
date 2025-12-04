@@ -12,28 +12,28 @@
     "api": "tsg"
   },
   "dependencies": {
-    "@abraham/reflection": "^0.12.0",
-    "injection-js": "^2.4.0",
-    "vue": "^3.5.13",
-    "vue-router": "^4.5.0",
-    "vue3-oop": "^1.2.0",
+    "@abraham/reflection": "^0.13.0",
     "ant-design-vue": "^4.2.6",
+    "axios": "^1.13.2",
+    "es-toolkit": "^1.42.0",
+    "injection-js": "^2.6.1",
+    "ts-essentials": "^10.1.1",
     "tslib": "^2.8.1",
-    "axios": "^1.8.4",
-    "es-toolkit": "^1.34.1",
-    "ts-essentials": "^10.0.4"
+    "vue": "^3.5.25",
+    "vue-router": "^4.6.3",
+    "vue3-oop": "^1.2.1"
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.17",
-    "postcss": "^8.5.3",
-    "typescript": "^5.8.2",
-    "vite-plugin-tsconfig-paths": "^1.4.1",
+    "@vue/runtime-dom": "^3.5.25",
     "@vue3-oop/plugin-vue-jsx": "workspace:*",
-    "@vue/runtime-dom": "^3.5.13",
-    "@vue3-oop/ts-gear": "workspace:*",
     "@vue3-oop/tailwind-preset": "workspace:*",
+    "@vue3-oop/ts-gear": "workspace:*",
     "@vue3-oop/vite-plugin-debug": "workspace:*",
     "@vue3-oop/vite-plugin-version": "workspace:*",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5.9.3",
+    "vite-plugin-tsconfig-paths": "^1.4.1",
     "vue-better-props": "workspace:*"
   }
 }

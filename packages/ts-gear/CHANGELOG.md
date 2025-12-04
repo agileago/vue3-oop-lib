@@ -1,5 +1,11 @@
 # @vue3-oop/ts-gear
 
+## 5.0.7
+
+### Patch Changes
+
+- update path-reg-exp version
+
 ## 5.0.6
 
 ### Patch Changes

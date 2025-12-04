@@ -42,13 +42,13 @@
     "prepublishOnly": "pnpm build"
   },
   "dependencies": {
-    "svgo": "^3.3.2",
+    "svgo": "^4.0.0",
     "tailwindcss-rem2px-preset": "^1.0.3",
-    "tailwindcss-safe-area": "^0.5.1",
-    "ts-deepmerge": "^7.0.0"
+    "tailwindcss-safe-area": "^1.2.0",
+    "ts-deepmerge": "^7.0.3"
   },
   "devDependencies": {
-    "tailwindcss": "^3"
+    "tailwindcss": "^4.1.17"
   },
   "peerDependencies": {
     "tailwindcss": ">=3.2.0"

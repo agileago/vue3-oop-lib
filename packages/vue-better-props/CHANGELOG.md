@@ -1,5 +1,11 @@
 # vue-better-props
 
+## 0.0.4
+
+### Patch Changes
+
+- feat: improve injectService to support function injection, default values, and factory pattern
+
 ## 0.0.3
 
 ### Patch Changes

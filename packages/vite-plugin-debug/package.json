@@ -45,7 +45,7 @@
     "prepublishOnly": "pnpm build"
   },
   "dependencies": {
-    "ts-deepmerge": "^7.0.1"
+    "ts-deepmerge": "^7.0.3"
   },
   "peerDependencies": {
     "vite": ">=4.0.0"

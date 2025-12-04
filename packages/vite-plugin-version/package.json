@@ -45,7 +45,7 @@
     "prepublishOnly": "pnpm build"
   },
   "dependencies": {
-    "es-toolkit": "^1.39.3"
+    "es-toolkit": "^1.42.0"
   },
   "peerDependencies": {
     "vite": ">=4.0.0"
