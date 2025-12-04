@@ -1,5 +1,7 @@
 node-linker: hoisted
 link-workspace-packages: true
+publicHoistPattern:
+  - "*prettier*"
 packages:
   - packages/*
   - playground

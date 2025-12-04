@@ -25,7 +25,7 @@
     ]
   },
   "simple-git-hooks": {
-    "pre-commit": "enpm exec lint-staged --allow-empty --concurrent false",
+    "pre-commit": "pnpm exec lint-staged --allow-empty --concurrent false",
     "commit-msg": "pnpm exec commitlint -e $1"
   },
   "lint-staged": {
