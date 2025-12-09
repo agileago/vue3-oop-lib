@@ -1,5 +1,11 @@
 # vue-better-props
 
+## 0.0.5
+
+### Patch Changes
+
+- 性能优化
+
 ## 0.0.4
 
 ### Patch Changes

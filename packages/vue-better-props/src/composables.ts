@@ -1,5 +1,6 @@
 import { camelize, getCurrentInstance, useAttrs, useSlots } from 'vue'
 import type { ClassAndStyleProps } from './types'
+import { getEmitsFromProps } from './util'
 
 export function camelizePropKey(p: string | symbol): string | symbol {
   if (typeof p === 'string') {
@@ -14,22 +15,42 @@ export function useProps<T>(): T {
   if (!instance) {
     throw new Error('useProps must be called inside setup()')
   }
+  // 组件定义
+  let vnodeProps: any = null
+  let propsObj: any = null
+
+  function addEmitsForComp() {
+    if (vnodeProps === instance!.vnode.props) return
+    getProps()
+    getEmitsFromProps(Object.keys(propsObj), instance!.type.emits)
+    for (const item of instance!.type.emits) {
+      // @ts-ignore
+      if (!(item in instance!.emitsOptions)) instance!.emitsOptions[item] = null
+    }
+  }
 
   const slots = useSlots()
   const getProps = () => {
-    return Object.fromEntries(Object.entries(instance.vnode.props || {}).map(([k, v]) => [camelizePropKey(k), v]))
+    if (vnodeProps === instance.vnode.props) return propsObj
+    vnodeProps = instance.vnode.props
+    propsObj = Object.fromEntries(Object.entries(instance.vnode.props || {}).map(([k, v]) => [camelizePropKey(k), v]))
+    return propsObj
   }
+
+  addEmitsForComp()
 
   return new Proxy(
     {},
     {
       get(target, p, receiver) {
+        addEmitsForComp()
         const slotName = getSlotName(p)
         if (slotName) {
           const slot = Reflect.get(slots, slotName, receiver)
           if (slot) return slot
         }
         const key = camelizePropKey(p)
+        // 处理属性默认值
         if (key in instance.props) {
           // @ts-ignore
           return instance.props[key]
@@ -41,6 +62,7 @@ export function useProps<T>(): T {
         }
       },
       ownKeys() {
+        addEmitsForComp()
         return [
           ...new Set([
             ...Reflect.ownKeys(instance.props),
@@ -50,19 +72,26 @@ export function useProps<T>(): T {
         ]
       },
       has(target, p) {
+        addEmitsForComp()
         const slotName = getSlotName(p)
         if (slotName) {
           return Reflect.has(slots, slotName)
         }
-        return Reflect.has(getProps(), camelizePropKey(p))
+        const key = camelizePropKey(p)
+        return Reflect.has(instance.props, key) || Reflect.has(getProps(), key)
       },
       getOwnPropertyDescriptor(target, p) {
+        addEmitsForComp()
         const slotName = getSlotName(p)
         if (slotName) {
           const descriptor = Reflect.getOwnPropertyDescriptor(slots, slotName)
           if (descriptor) return descriptor
         }
-        return Reflect.getOwnPropertyDescriptor(getProps(), camelizePropKey(p))
+        const key = camelizePropKey(p)
+        if (key in instance.props) {
+          return Reflect.getOwnPropertyDescriptor(instance.props, key)
+        }
+        return Reflect.getOwnPropertyDescriptor(getProps(), key)
       },
     },
   ) as any

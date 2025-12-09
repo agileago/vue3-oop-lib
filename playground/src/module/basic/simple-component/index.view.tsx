@@ -1,4 +1,5 @@
 import { ref } from 'vue'
+import { getCurrentInstance } from '@vue/runtime-dom'
 import {
   defineComponent,
   injectService,
@@ -38,6 +39,19 @@ export const SimpleStateComponent = defineComponent(function SimpleStateComponen
   )
 })
 
+export const Abc = defineComponent(
+  (props: { onClick?: () => void }) => {
+    let count = 0
+    return () => {
+      console.log('refresh:', count++)
+      return <div>{count}</div>
+    }
+  },
+  {
+    name: 'Abc',
+  },
+)
+
 export const SimpleStateWithDefaultValueComponent = defineComponent(
   function SimpleStateWithDefaultValueComponent(props: SimpleStateComponentProps, { attrs }) {
     const classAndStyle = useClassAndStyle()
@@ -49,6 +63,7 @@ export const SimpleStateWithDefaultValueComponent = defineComponent(
         <div {...classAndStyle} {...props}>
           <h3>带默认属性参数的组件</h3>
           <input type={'number'} v-model={count.value} />
+          <Abc onClick={() => console.log('nothing')}></Abc>
         </div>
       )
     }

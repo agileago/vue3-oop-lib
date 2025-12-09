@@ -1,6 +1,7 @@
 import { defineComponent as vueDefineComponent, type ComponentOptions } from 'vue'
 import { useProps } from './composables'
 import type { ComponentType, FunctionalComponent } from './types'
+import { getEmitsFromProps } from './util'
 
 export { useClassAndStyle, camelizePropKey } from './composables'
 export * from './types'
@@ -22,7 +23,9 @@ export function defineComponent<
     inheritAttrs: false,
     name: comp.name || comp.displayName,
     ...extraOptions,
+    emits: getEmitsFromProps(extraOptions?.props || [], extraOptions?.emits),
   }) as any
 }
 export * from './service'
 export * from './component'
+export { mergeRefs, useForwardRef } from './util'

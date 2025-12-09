@@ -1,15 +1,15 @@
 {
   "name": "playground",
-  "description": "安全风险智能地图",
   "version": "1.0.0",
   "private": true,
+  "description": "安全风险智能地图",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
+    "api": "tsg",
     "api:init": "tsg -i",
-    "api": "tsg"
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@abraham/reflection": "^0.13.0",
@@ -31,7 +31,7 @@
     "@vue3-oop/vite-plugin-debug": "workspace:*",
     "@vue3-oop/vite-plugin-version": "workspace:*",
     "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.17",
+    "tailwindcss": "^3.4.18",
     "typescript": "^5.9.3",
     "vite-plugin-tsconfig-paths": "^1.4.1",
     "vue-better-props": "workspace:*"
