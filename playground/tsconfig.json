@@ -4,6 +4,7 @@
     "target": "ESNext",
     "importHelpers": true,
     "allowUnusedLabels": true,
+    "noImplicitAny": false,
     "types": ["vue/jsx"],
     "baseUrl": ".",
     "paths": {

@@ -1,5 +1,11 @@
 # vue-better-props
 
+## 0.0.6
+
+### Patch Changes
+
+- 删除部分vue固有的属性
+
 ## 0.0.5
 
 ### Patch Changes

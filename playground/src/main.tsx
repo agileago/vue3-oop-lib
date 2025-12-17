@@ -72,5 +72,9 @@ class App extends VueComponent {
 }
 
 const app = createApp(App)
+app.directive('color', (el, binding) => {
+  // 这会在 `mounted` 和 `updated` 时都调用
+  el.style.color = binding.value
+})
 setup(app)
 app.mount('#app')

@@ -81,30 +81,39 @@ export const SimpleStateWithDefaultValueComponent = defineComponent(
 // endregion
 
 // 简单状态组件定义
-const SimpleComponent = defineComponent(() => {
-  const init = ref<undefined | number>(10)
-  const cs = new CountService()
-  provideService(cs)
-  console.log(cs)
+const SimpleComponent = defineComponent(
+  () => {
+    const init = ref<undefined | number>(10)
+    const cs = new CountService()
+    provideService(cs)
+    console.log(cs)
 
-  return () => (
-    <div>
-      <h2>简单组件定义</h2>
-      <h3>函数组件</h3>
-      <div class={'icon-arrow-top text-red-400'}></div>
-      <div class={'font-d-din-pro'}>1122</div>
-      <div class={'font-puhui'}>任建华</div>
-      <SimpleFuncComponent count={20}></SimpleFuncComponent>
-      <SimpleStateComponent initialValue={10}></SimpleStateComponent>
-      <button onClick={() => (init.value = init.value ? undefined : 10)}>切换默认值</button>
-      <SimpleStateWithDefaultValueComponent
-        class={'aaaa'}
-        initialValue={init.value}
-        // @ts-ignore
-        data-a={1111}
-      ></SimpleStateWithDefaultValueComponent>
-    </div>
-  )
-})
+    return () => (
+      <div>
+        <h2>简单组件定义</h2>
+        <h3>函数组件</h3>
+        <div class={'icon-arrow-top text-red-400'}></div>
+        <div class={'font-d-din-pro'}>1122</div>
+        <div class={'font-puhui'}>任建华</div>
+        <SimpleFuncComponent count={20}></SimpleFuncComponent>
+        <SimpleStateComponent initialValue={10}></SimpleStateComponent>
+        <button onClick={() => (init.value = init.value ? undefined : 10)}>切换默认值</button>
+        <SimpleStateWithDefaultValueComponent
+          key={'1222'}
+          ref={'aaa'}
+          onVnodeBeforeMount={() => console.log('onVnodeBeforeMount')}
+          v-color={'red'}
+          class={['aaaa']}
+          initialValue={init.value}
+          // @ts-ignore
+          data-a={1111}
+        ></SimpleStateWithDefaultValueComponent>
+      </div>
+    )
+  },
+  {
+    name: 'simpleComp',
+  },
+)
 
 export default SimpleComponent

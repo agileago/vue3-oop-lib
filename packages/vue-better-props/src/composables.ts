@@ -10,6 +10,19 @@ export function camelizePropKey(p: string | symbol): string | symbol {
   return p
 }
 
+const FREEZ_KEY = new Set([
+  'key',
+  'ref',
+  'ref_for',
+  'ref_key',
+  'onVnodeBeforeMount',
+  'onVnodeMounted',
+  'onVnodeBeforeUpdate',
+  'onVnodeUpdated',
+  'onVnodeBeforeUnmount',
+  'onVnodeUnmounted',
+])
+
 export function useProps<T>(): T {
   const instance = getCurrentInstance()
   if (!instance) {
@@ -33,7 +46,11 @@ export function useProps<T>(): T {
   const getProps = () => {
     if (vnodeProps === instance.vnode.props) return propsObj
     vnodeProps = instance.vnode.props
-    propsObj = Object.fromEntries(Object.entries(instance.vnode.props || {}).map(([k, v]) => [camelizePropKey(k), v]))
+    propsObj = Object.fromEntries(
+      Object.entries(instance.vnode.props || {})
+        .filter(([k, v]) => !FREEZ_KEY.has(k))
+        .map(([k, v]) => [camelizePropKey(k), v]),
+    )
     return propsObj
   }
 
@@ -63,30 +80,15 @@ export function useProps<T>(): T {
       },
       ownKeys() {
         addEmitsForComp()
-        return [
-          ...new Set([
-            ...Reflect.ownKeys(instance.props),
-            ...Reflect.ownKeys(getProps()),
-            ...Reflect.ownKeys(slots).map(k => (typeof k === 'string' ? camelize(`render-${k}`) : k)),
-          ]),
-        ]
+        return [...new Set([...Reflect.ownKeys(instance.props), ...Reflect.ownKeys(getProps())])]
       },
       has(target, p) {
         addEmitsForComp()
-        const slotName = getSlotName(p)
-        if (slotName) {
-          return Reflect.has(slots, slotName)
-        }
         const key = camelizePropKey(p)
         return Reflect.has(instance.props, key) || Reflect.has(getProps(), key)
       },
       getOwnPropertyDescriptor(target, p) {
         addEmitsForComp()
-        const slotName = getSlotName(p)
-        if (slotName) {
-          const descriptor = Reflect.getOwnPropertyDescriptor(slots, slotName)
-          if (descriptor) return descriptor
-        }
         const key = camelizePropKey(p)
         if (key in instance.props) {
           return Reflect.getOwnPropertyDescriptor(instance.props, key)
