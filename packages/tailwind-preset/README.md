@@ -24,7 +24,7 @@ pnpm add -D @vue3-oop/tailwind-preset
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   presets: [
-    require('@@vue3-oop/tailwind-preset').preset()
+    require('@vue3-oop/tailwind-preset').preset()
   ],
 }
 
